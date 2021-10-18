@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h1>Posts archive</h1>
+  <p>The library has the following data:</p>
+  <strong>Posts:</strong>
+  <ul>
+    {% for post in post_list %}
+    <li><a href="{{ post.pk }}">Post {{ post.id }}</a> - "{{ post.title }}" by <a style="color: black" href="">{{ post.author }}</a>. Last edited : {{ post.edit_date }} {{ post.edit_time }}</li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
+
