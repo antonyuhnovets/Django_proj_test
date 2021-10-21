@@ -3,8 +3,8 @@ from .models import Post, Author
 
 # Register your models here.
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email')
-    fields = ('username', 'name', 'email', 'date_of_birth')
+    list_display = ('username', 'email', 'first_name', 'last_name')
+    fields = ('username', 'email', 'first_name', 'last_name')
 
 class PostAdmin(admin.ModelAdmin):
     list_filter = ('edit_date', 'author')

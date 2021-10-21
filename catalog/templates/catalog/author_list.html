@@ -6,7 +6,7 @@
   <strong>Authors:</strong>
   <ul>
     {% for author in author_list %}
-    <li><a href="{{ author.pk }}">{{ author.username }}</a> - "{{ author.name }}"</li>
+    <li><a href="{{ author.pk }}">{{ author.username }}</a> - "{{ author.first_name }} {{ author.last_name }}"</li>
     {% endfor %}
   </ul>
 
