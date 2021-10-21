@@ -1,18 +1,20 @@
-import datetime
-
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User, UserManager
 
-class Author(models.Model):
-    username = models.CharField(max_length=16)
-    name = models.CharField(max_length=32)
-    email = models.EmailField()
-    date_of_birth = models.DateField(null=True)
+class Author(User):
+    objects = UserManager()
+    username = User.username
+    email = User.email
+    first_name = User.first_name
+    last_name = User.last_name
 
-    def __str__(self): return (f'{self.username}')
+    class Meta:
+        proxy = True
+        ordering = ('username', 'email', 'first_name', 'last_name')
 
     def get_absolute_url(self):
-        return reverse('author_list', args=[str(self.id)])
+        return reverse('author_list', args=[str(self.pk)])
 
 class Post(models.Model):
     author = models.ForeignKey('Author', on_delete=models.DO_NOTHING)
@@ -21,11 +23,7 @@ class Post(models.Model):
     edit_date = models.DateField(auto_now=True)
     edit_time = models.TimeField(auto_now=True)
 
-    def __str__(self): return f'Post {self.id} from {self.edit_date}'
-
     def get_absolute_url(self):
-        return reverse('post_list', args=[str(self.id)])
-
-# {{ x.get_absolute_url }}
+        return reverse('post_list', args=[str(self.pk)])
 
 

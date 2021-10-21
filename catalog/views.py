@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Author, Post
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index(request):
     num_posts = Post.objects.all().count()
@@ -47,4 +48,10 @@ class AuthorListView(generic.ListView):
 
 class AuthorDetailView(generic.DetailView):
     model = Author
+
+class PostCreate(LoginRequiredMixin, generic.CreateView):
+    model = Post
+    fields = ['title', 'body']
+
+
 

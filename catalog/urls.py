@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^$', views.base, name='base'),
     url(r'^post_list/$', views.PostListView.as_view(), name='post_list'),
     url(r'^post_list/(?P<pk>\d+)$', views.PostDetailView.as_view(), name='post_detail'),
+    url(r'^post_form/$', views.PostCreate.as_view(), name='post_form'),
 ]
 
 urlpatterns += [
