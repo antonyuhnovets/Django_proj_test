@@ -2,6 +2,10 @@ from django.shortcuts import render
 from .models import Author, Post
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.models import User
+from .forms import PostForm
+from django import forms
 
 def index(request):
     num_posts = Post.objects.all().count()
@@ -28,14 +32,6 @@ class PostListView(generic.ListView):
     queryset = Post.objects.all()
     paginate_by = 1
 
-    def get_queryset(self):
-        return self.queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(PostListView, self).get_context_data(**kwargs)
-        context['some_data'] = 'This is just some data'
-        return context
-
 class PostDetailView(generic.DetailView):
     model = Post
 
@@ -52,6 +48,13 @@ class AuthorDetailView(generic.DetailView):
 class PostCreate(LoginRequiredMixin, generic.CreateView):
     model = Post
     fields = ['title', 'body']
+
+class PostUpdate(generic.UpdateView):
+    model = Post
+    fields = ['title', 'body']
+    template_name_suffix = '_edit_form'
+
+
 
 
 

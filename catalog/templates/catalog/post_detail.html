@@ -3,8 +3,12 @@
 {% block content %}
   <h1>Title: {{ post.title }}</h1>
 
-  <p><strong>Author:</strong> <a href="{% url 'user_detail' user.pk %}">{{ post.author }}</a></p>
+  <p><strong>Author:</strong> <a href="{% url 'post_detail' user.pk %}">{{ post.author }}</a></p>
   <p><strong>Body:</strong> {{ post.body }}</p>
+  <p><a href="post_edit_form"><strong>Edit post</strong></a></p>
 
 
 {% endblock %}
+
+
+
